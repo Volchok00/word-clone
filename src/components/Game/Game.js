@@ -11,6 +11,7 @@ console.info({ answer });
 
 function Game() {
   const [guess, setGuess] = useState("");
+  const [submittedGuesses, setSubmittedGuesses] = useState([]);
 
   const onChange = (e) => {
     const nextGuess = e.target.value.toUpperCase();
@@ -22,11 +23,25 @@ function Game() {
   const onSubmit = (e) => {
     e.preventDefault();
     if (guess.length === 5) {
-      console.info({ guess });
+      const nextGuesses = [...submittedGuesses];
+      nextGuesses.push(guess);
+      setSubmittedGuesses(nextGuesses);
+      setGuess("");
     }
   };
 
-  return <GuessInput guess={guess} onChange={onChange} onSubmit={onSubmit} />;
+  return (
+    <>
+      <div className="guess-results">
+        {submittedGuesses.map((el, i) => (
+          <p className="guess" key={i}>
+            {el}
+          </p>
+        ))}
+      </div>
+      <GuessInput guess={guess} onChange={onChange} onSubmit={onSubmit} />
+    </>
+  );
 }
 
 export default Game;
