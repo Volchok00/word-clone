@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
@@ -10,7 +10,15 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  return <GuessInput />;
+  const [guess, setGuess] = useState("");
+
+  const onChange = (e) => {
+    const nextGuess = e.target.value.toUpperCase();
+    if (nextGuess.length <= 5) {
+      setGuess(nextGuess);
+    }
+  };
+  return <GuessInput guess={guess} onChange={onChange} />;
 }
 
 export default Game;
