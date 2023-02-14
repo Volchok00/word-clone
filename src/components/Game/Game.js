@@ -18,7 +18,15 @@ function Game() {
       setGuess(nextGuess);
     }
   };
-  return <GuessInput guess={guess} onChange={onChange} />;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (guess.length === 5) {
+      console.info({ guess });
+    }
+  };
+
+  return <GuessInput guess={guess} onChange={onChange} onSubmit={onSubmit} />;
 }
 
 export default Game;
