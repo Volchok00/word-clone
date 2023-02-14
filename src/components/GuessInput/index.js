@@ -1,1 +1,1 @@
-export {GuessInput} from "./GuessInput";
+export { GuessInput } from "./GuessInput";
