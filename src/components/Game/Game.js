@@ -51,6 +51,7 @@ function Game() {
           const validatedGuess = checkGuess(submittedGuesses[el], answer);
           return (
             <Guess
+              key={el}
               value={submittedGuesses[el]}
               validatedGuess={validatedGuess}
             />
