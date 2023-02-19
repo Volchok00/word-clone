@@ -21,9 +21,9 @@ function Game() {
   const [submittedGuesses, setSubmittedGuesses] = useState([]);
 
   const onChange = (e) => {
-    const nextGuess = e.target.value.toUpperCase();
+    const nextGuess = e.target.value;
     if (nextGuess.length <= MAX_WORD_LENGTH) {
-      setGuess(nextGuess);
+      setGuess(nextGuess.toUpperCase());
     }
   };
 
@@ -38,8 +38,7 @@ function Game() {
         if (guess === answer) {
           setStatus("won");
         }
-      }
-      if (nextGuesses.length === NUM_OF_GUESSES_ALLOWED) {
+      } else if (nextGuesses.length === NUM_OF_GUESSES_ALLOWED) {
         setStatus("lost");
       }
     }
