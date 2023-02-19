@@ -5,12 +5,11 @@ import { WORDS } from "../../data";
 import { GuessInput } from "../GuessInput";
 import { Guess } from "../Guess";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
+import { checkGuess } from "../../game-helpers";
 import { range } from "../../utils";
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
-// To make debugging easier, we'll log the solution in the console.
-console.info({ answer });
 
 function Game() {
   const [guess, setGuess] = useState("");
@@ -38,9 +37,15 @@ function Game() {
   return (
     <>
       <div className="guess-results">
-        {range(0, NUM_OF_GUESSES_ALLOWED).map((el) => (
-          <Guess value={submittedGuesses[el]} />
-        ))}
+        {range(0, NUM_OF_GUESSES_ALLOWED).map((el) => {
+          const validatedGuess = checkGuess(submittedGuesses[el], answer);
+          return (
+            <Guess
+              value={submittedGuesses[el]}
+              validatedGuess={validatedGuess}
+            />
+          );
+        })}
       </div>
       <GuessInput guess={guess} onChange={onChange} onSubmit={onSubmit} />
     </>
